@@ -1,15 +1,12 @@
-const monogoose = require('mongoose');
+const dotenv = require("dotenv");
+const mongoose = require('mongoose');
 const express = require("express");
 const app = express();
 
-const DB = 'mongodb+srv://kunalwork56:kunalwork@cluster0.2ck7fqj.mongodb.net/mernstack?retryWrites=true&w=majority';
+dotenv.config({path:"./config.env"});
+require('./db/conn');
 
-monogoose.connect(DB).then(()=>{
-    console.log("connection successfull with anywhere");
-}).catch((err) =>{
-    console.log("error occur");
-});
-
+const PORT = process.env.PORT;
 
 const middlware = (req , res , next) =>{
      console.log("middlware is working here...");
@@ -34,6 +31,6 @@ app.get("/Signup" , (req , res)=>{
 
 // console.log("checking its working or not and i am kunal kishor");
 
-app.listen(3000 , ()=>{
+app.listen(PORT , ()=>{
     console.log("server is working....");
 })
