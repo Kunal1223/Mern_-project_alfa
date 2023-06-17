@@ -6,6 +6,12 @@ const app = express();
 dotenv.config({path:"./config.env"});
 require('./db/conn');
 
+app.use(express.json()); //beacuse express not understand the json formate
+
+
+// const User = require('./model/userSchema');
+app.use(require("./router/auth"));
+
 const PORT = process.env.PORT;
 
 const middlware = (req , res , next) =>{
