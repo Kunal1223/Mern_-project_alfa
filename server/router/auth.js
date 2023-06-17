@@ -51,19 +51,20 @@ router.post('/resister', async (req, res) => {
         const userExist = await User.findOne({ email: email });
         if (userExist) {
             return res.status(422).json({ error: "You are already resister" });
-        }
-        const user = new User({ name, email, phone, password, cpassword });//we also write this like {name:name} but according to new convention we directly write {name} instant of {name:name}
+        } else if (password != cpassword) {
+            return res.status(422).json({ error: "Password are not matching" });
+        } else {
+            const user = new User({ name, email, phone, password, cpassword });//we also write this like {name:name} but according to new convention we directly write {name} instant of {name:name}
 
-        const userResister = await user.save();
-
-        if (userResister) {
-            res.status(201).json({ message: "You are Resister succesfully" });
+            const userResister = await user.save();
+            if (userResister) {
+                res.status(201).json({ message: "You are Resister succesfully" });
+            }
         }
 
         //upgrade version of above code
         //  await user.save();
         //  res.status(201).json({ message: "You are Resister succesfully" });
-
     } catch (err) {
         console.log(err)
     }
@@ -83,8 +84,8 @@ router.post('/signin', async (req, res) => {
         const userLogin = await User.findOne({ email: email });
 
         if (userLogin) {
-            const isMatch = await bcrypt.compare( password ,userLogin.password );
-            const token =  await userLogin.generateAuthToken();//declare a token fun()
+            const isMatch = await bcrypt.compare(password, userLogin.password);
+            const token = await userLogin.generateAuthToken();//declare a token fun()
             console.log(token);
             if (!isMatch) {
                 res.status(400).json({ error: "authentication errorP" });
@@ -108,7 +109,5 @@ router.post('/signin', async (req, res) => {
         console.log(err)
     }
 });
-
-
 
 module.exports = router;
