@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 require("../db/conn");
 const User = require('../model/userSchema');
@@ -83,15 +84,17 @@ router.post('/signin', async (req, res) => {
 
         if (userLogin) {
             const isMatch = await bcrypt.compare( password ,userLogin.password );
+            const token =  await userLogin.generateAuthToken();//declare a token fun()
+            console.log(token);
             if (!isMatch) {
-                res.status(400).json({ error: "authentication error" });
+                res.status(400).json({ error: "authentication errorP" });
             }
             else {
                 res.status(200).json({ message: "You are login succesfully" });
             }
         }
         else {
-            res.status(400).json({ error: "authentication error" });
+            res.status(400).json({ error: "authentication error1" });
         }
 
         // if (!userLogin) {
