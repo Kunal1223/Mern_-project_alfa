@@ -190,19 +190,22 @@ body {
 }
 
 .sign-in {
-  height: 90vh;
+  height: 70vh;
   display: grid;
   place-items: center;
 }
 
 .signup {
-  height: 85vh;
+  margin-top: 5vh;
+  height: 55vh;
+  width: 68vw;
+  margin: auto;
   display: grid;
-  place-items: center;
+  
 }
 
 .signup-content {
-  padding: 75px 0;
+  padding: 35px 0;
 }
 
 .signup-form,
@@ -218,7 +221,7 @@ body {
 }
 
 .form-title {
-  margin-bottom: 33px;
+  margin-bottom: 23px;
   font-weight: bold;
 }
 

@@ -29,7 +29,7 @@ const Navbar = () => {
                                 <NavLink className="nav-link active" aria-current="page" to="/login">Login</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/singup">Registration</NavLink>
+                                <NavLink className="nav-link active" aria-current="page" to="/signup">Registration</NavLink>
                             </li>
                         </ul>
                     </div>
