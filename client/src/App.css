@@ -191,8 +191,9 @@ body {
 
 .sign-in {
   height: 70vh;
+  width: 70vw;
   display: grid;
-  place-items: center;
+  margin: auto;
 }
 
 .signup {
