@@ -1016,7 +1016,7 @@ label.valid:after {
 
 #notfound {
   position: relative;
-  height: 100vh;
+  height: 80vh;
 }
 
 #notfound .notfound {
@@ -1064,7 +1064,7 @@ label.valid:after {
 
 .notfound h2 {
   font-family: "Maven Pro", sans-serif;
-  font-size: 46px;
+  font-size: 26px;
   color: #000;
   font-weight: 900;
   text-transform: uppercase;
@@ -1073,7 +1073,7 @@ label.valid:after {
 
 .notfound p {
   font-family: "Maven Pro", sans-serif;
-  font-size: 16px;
+  font-size: 13px;
   color: #000;
   font-weight: 400;
   text-transform: uppercase;
