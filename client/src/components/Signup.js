@@ -1,8 +1,21 @@
-import React from 'react'
+import React , {useState} from 'react'
 import { NavLink } from 'react-router-dom';
 import signpic from "../images/signup.png";
 
 const Singup = () => {
+ 
+  const[user , setUser] = useState({
+    name: "" , email:"" , phone : "" , work : "" , password:"", cpassword :""
+  })
+
+  let name , value ;
+const handleInpute = (e) =>{
+      name = e.target.name ;
+      value = e.target.value;
+      setUser({...user , [name]:value});
+      console.log(user)
+  }
+
   return (
     <>
       <section className="signup">
@@ -16,7 +29,9 @@ const Singup = () => {
                   <label htmlFor="name">
                     <i className="zmdi zmdi-account material-icons-name"></i>
                   </label>
-                  <input type="text" name="name" id="name" autocomplete="off"
+                  <input type="text" name="name" id="name" autoComplete="off"
+                    value={user.name}
+                    onChange={handleInpute}
                     placeholder="Your Name"
                   />
                 </div>
@@ -26,6 +41,8 @@ const Singup = () => {
                     <i className="zmdi zmdi-email material-icons-name"></i>
                   </label>
                   <input type="email" name="email" id="email" autoComplete="off"
+                    value={user.email}
+                    onChange={handleInpute}
                     placeholder="Your Email"
                   />
                 </div>
@@ -35,6 +52,8 @@ const Singup = () => {
                     <i className="zmdi zmdi-phone-in-talk material-icons-name"></i>
                   </label>
                   <input type="number" name="phone" id="phone" autoComplete="off"
+                    value={user.phone}
+                    onChange={handleInpute}
                     placeholder="Your Phone"
                   />
                 </div>
@@ -44,6 +63,8 @@ const Singup = () => {
                     <i className="zmdi zmdi-slideshow material-icons-name"></i>
                   </label>
                   <input type="text" name="work" id="work" autoComplete="off"
+                    value={user.work}
+                    onChange={ handleInpute}
                     placeholder="Your Profession"
                   />
                 </div>
@@ -53,6 +74,8 @@ const Singup = () => {
                     <i className="zmdi zmdi-lock material-icons-name"></i>
                   </label>
                   <input type="password" name="password" id="password" autoComplete="off"
+                    value={user.password}
+                    onChange={ handleInpute}
                     placeholder="Your Password"
                   />
                 </div>
@@ -62,6 +85,8 @@ const Singup = () => {
                     <i className="zmdi zmdi-lock material-icons-name"></i>
                   </label>
                   <input type="password" name="cpassword" id="cpassword" autoComplete="off"
+                    value={user.cpassword}
+                    onChange={ handleInpute}
                     placeholder="Confirm Your Password"
                   />
                 </div>
