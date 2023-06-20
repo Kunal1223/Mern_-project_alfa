@@ -1,19 +1,47 @@
-import React , {useState} from 'react'
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react'
+import { NavLink , useNavigate} from 'react-router-dom';
 import signpic from "../images/signup.png";
 
 const Singup = () => {
- 
-  const[user , setUser] = useState({
-    name: "" , email:"" , phone : "" , work : "" , password:"", cpassword :""
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "", email: "", phone: "", work: "", password: "", cpassword: ""
   })
 
-  let name , value ;
-const handleInpute = (e) =>{
-      name = e.target.name ;
-      value = e.target.value;
-      setUser({...user , [name]:value});
-      console.log(user)
+  let name, value;
+  const handleInpute = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    setUser({ ...user, [name]: value });
+  }
+
+  const PostData = async (e) => {
+    e.preventDefault();
+    console.log("this is called");
+
+    const { name, email, phone, work, password, cpassword } = user;
+    const res = await fetch('/register', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name, email, phone, work, password, cpassword
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.status === 422 || !data) {
+      window.alert("Invalid Resistration");
+      console.log("Invalid Resistration");
+    }
+    else {
+      window.alert("Resistration Successfuly");
+      console.log("Resistration Successfuly");
+      navigate('/login' , {replace:true}); 
+    }
+
   }
 
   return (
@@ -64,7 +92,7 @@ const handleInpute = (e) =>{
                   </label>
                   <input type="text" name="work" id="work" autoComplete="off"
                     value={user.work}
-                    onChange={ handleInpute}
+                    onChange={handleInpute}
                     placeholder="Your Profession"
                   />
                 </div>
@@ -75,7 +103,7 @@ const handleInpute = (e) =>{
                   </label>
                   <input type="password" name="password" id="password" autoComplete="off"
                     value={user.password}
-                    onChange={ handleInpute}
+                    onChange={handleInpute}
                     placeholder="Your Password"
                   />
                 </div>
@@ -86,14 +114,14 @@ const handleInpute = (e) =>{
                   </label>
                   <input type="password" name="cpassword" id="cpassword" autoComplete="off"
                     value={user.cpassword}
-                    onChange={ handleInpute}
+                    onChange={handleInpute}
                     placeholder="Confirm Your Password"
                   />
                 </div>
 
                 <div className="form-group form-button">
                   <input type="submit" name="signup" id="signup" className="form-submit"
-                    value="register"
+                    value="register" onClick={PostData}
                   />
                 </div>
 

@@ -8,7 +8,7 @@ const User = require('../model/userSchema');
 
 
 router.get("/", (req, res) => {
-    res.send("This is a home page for you kunal kishor1 working on router.");
+    res.send("This is a home page for you kunal kishor1 working on router hello.");
 })
 
 //using promises
@@ -39,11 +39,11 @@ router.get("/", (req, res) => {
 
 
 //by unsing async and await
-router.post('/resister', async (req, res) => {
+router.post('/register', async (req, res) => {
 
-    const { name, email, phone, password, cpassword } = req.body;
+    const { name, email, phone, work , password, cpassword } = req.body;
 
-    if (!name || !email || !phone || !password || !cpassword) {
+    if (!name || !email || !phone || !work || !password || !cpassword) {
         return res.status(422).json({ error: "Please fill all the secton" });
     }
 
@@ -54,7 +54,7 @@ router.post('/resister', async (req, res) => {
         } else if (password != cpassword) {
             return res.status(422).json({ error: "Password are not matching" });
         } else {
-            const user = new User({ name, email, phone, password, cpassword });//we also write this like {name:name} but according to new convention we directly write {name} instant of {name:name}
+            const user = new User({ name, email, phone, work , password, cpassword });//we also write this like {name:name} but according to new convention we directly write {name} instant of {name:name}
 
             const userResister = await user.save();
             if (userResister) {
