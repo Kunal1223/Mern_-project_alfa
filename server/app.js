@@ -14,18 +14,18 @@ app.use(require("./router/auth"));
 
 const PORT = process.env.PORT;
 
-const middlware = (req , res , next) =>{
-     console.log("middlware is working here...");
-     next();
-}
+// const middlware = (req , res , next) =>{
+//      console.log("middlware is working here...");
+//      next();
+// }
 
-app.get("/",  (req , res)=>{
-    res.send("This is a home page for you kunal kishor1.");
-})
+// app.get("/",  (req , res)=>{
+//     res.send("This is a home page for you kunal kishor1.");
+// })
 
-app.get("/about" , middlware , (req , res)=>{
-    res.send("This is about page for you");
-})
+// app.get("/about" , middlware , (req , res)=>{
+//     res.send("This is about page for you");
+// })
 
 app.get("/Signin" , (req , res)=>{
     res.send("This is Signin page for you");

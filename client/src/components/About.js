@@ -1,7 +1,44 @@
-import React from 'react'
+import React , {useState , useEffect}  from 'react'
+import { useNavigate } from 'react-router-dom';
 import kunalpic from "../images/kunalpic.jpg";
+import aboutpic from "../images/aboutpic.png";
 
 const About = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
+
+    const callAboutPage = async () => {
+        try {
+            const res = await fetch('/about', {
+                method: "GET",
+                headers: {
+                    Accept: "appllication/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+
+            const data = await res.json();
+            console.log(data);
+            setUserData(data);
+
+            if (!res.status === 200) {
+                const error = new Error(res.error);
+                throw error;
+            }
+
+        } catch (err) {
+            console.log(err);
+            navigate('/login' , {replace:true}); 
+        }
+    }
+
+    useEffect(() => {
+        callAboutPage();
+    }, []);
+
+
+
   return (
     <>
       <div className="container emp-profile">
@@ -9,15 +46,15 @@ const About = () => {
           <div className="row">
             <div className="col-md-4">
               <div className="profile-img">
-                <img src={kunalpic} alt="Kunal" />
+              <img src={userData.name === "Kunal Kishor" ? kunalpic : aboutpic} alt="kunal" />
               </div>
 
             </div>
 
             <div className="col-md-6">
               <div className="profile-head">
-                <h5>Kunal Kishor</h5>
-                <h6>Web Developer</h6>
+                <h5>{userData.name}</h5>
+                <h6>{userData.work}</h6>
                 <p className="profile-rating mt-3 mb-5">RANKINGS: <span> 4/10 </span></p>
                 <ul className="nav nav-tabs" role="tablist">
                   <li className="nav-item">
@@ -68,7 +105,7 @@ const About = () => {
                       <lebal>Name</lebal>
                     </div>
                     <div className="col-md-6 ">
-                      <p>Kunal Kishor</p>
+                      <p>{userData.name}</p>
                     </div>
                   </div>
                   <div className="row mt-3">
@@ -76,7 +113,7 @@ const About = () => {
                       <lebal>Email</lebal>
                     </div>
                     <div className="col-md-6">
-                      <p>kunalbth2002@gmail.com</p>
+                      <p>{userData.email}</p>
                     </div>
                   </div>
                   <div className="row mt-3">
@@ -84,7 +121,7 @@ const About = () => {
                       <lebal>Phone</lebal>
                     </div>
                     <div className="col-md-6">
-                      <p>8789169502</p>
+                      <p>{userData.phone}</p>
                     </div>
                   </div>
                   <div className="row mt-3">
