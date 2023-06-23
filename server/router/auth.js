@@ -78,7 +78,7 @@ router.post('/signin', async (req, res) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(404).json({ error: "Enter incorrect email" });
+            return res.status(400).json({ error: "Enter incorrect email" });
         }
 
         const userLogin = await User.findOne({ email: email });
@@ -86,7 +86,7 @@ router.post('/signin', async (req, res) => {
         if (userLogin) {
             const isMatch = await bcrypt.compare(password, userLogin.password);
             const token = await userLogin.generateAuthToken();//declare a token fun()
-            console.log(token);
+            // console.log(token);
             if (!isMatch) {
                 res.status(400).json({ error: "authentication errorP" });
             }
